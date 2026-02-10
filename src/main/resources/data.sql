@@ -1,0 +1,1 @@
+insert into books(title, author) values("Ali", "1233");

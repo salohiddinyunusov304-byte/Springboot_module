@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor // dependency injection uchun
 public class HomeController {
 
-    @Value("${g58.message}")
+//    @Value("${g58.message}")
 
     private final BookService bookService;
 
