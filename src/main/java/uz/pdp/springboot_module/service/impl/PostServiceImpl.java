@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import uz.pdp.springboot_module.entity.Post;
+import uz.pdp.springboot_module.repository.CustomRepository;
 import uz.pdp.springboot_module.repository.PostRepository;
 import uz.pdp.springboot_module.service.PostService;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
+    private final CustomRepository customRepository;
 
      @Override
     public Page<Post> getAllPosts(Integer page, Integer size) {
@@ -31,6 +33,21 @@ public class PostServiceImpl implements PostService {
         return postRepository.getPostsByUserId(userId, sort);
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        postRepository.deleteById(id);
+    }
+
+    @Override
+    public Post create(Post post) {
+//        return postRepository.save(post);
+        return customRepository.save(post);
+    }
+
+    @Override
+    public Post update(Post post) {
+        return postRepository.save(post);
+    }
 
 
 //    @Override

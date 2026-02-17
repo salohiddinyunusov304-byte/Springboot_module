@@ -9,4 +9,10 @@ public interface PostService {
     Page<Post> getAllPosts(Integer page, Integer size);
 
     List<Post> getAllPostsByUserId(Integer userId, String order);
+
+    void deleteById(Integer id);
+
+    Post create(Post post);
+
+    Post update(Post post);
 }
