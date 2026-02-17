@@ -30,4 +30,6 @@ public class PostController {
     ) {
         return postService.getAllPostsByUserId(userId, order);
     }
+
+
 }
