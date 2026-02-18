@@ -30,4 +30,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query("select p from Post p where p.userId = ?1")
     List<Post> getPostsByUserId(Integer userId, Sort sort);
 
+
+
 }
