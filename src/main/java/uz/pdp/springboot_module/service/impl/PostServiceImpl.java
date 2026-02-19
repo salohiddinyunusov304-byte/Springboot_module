@@ -30,7 +30,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getAllPostsByUserId(Integer userId, String order) {
         Sort sort = Sort.by(Sort.Direction.DESC, order == null ? "id" : order);
-        return postRepository.getPostsByUserId(userId, sort);
+        return postRepository.findAllByUserId(userId, sort);
+//        return postRepository.getPostsByUserId(userId, sort);
     }
 
     @Override
@@ -47,6 +48,12 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post update(Post post) {
         return postRepository.save(post);
+    }
+
+    @Override
+    public List<Post> findPostsByUserIds(List<Integer> usersIds, String order) {
+        Sort sort = Sort.by(Sort.Direction.DESC, order == null ? "id" : order);
+        return postRepository.findAllByUserIdIn(usersIds, sort);
     }
 
 

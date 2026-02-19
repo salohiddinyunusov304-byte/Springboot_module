@@ -32,6 +32,15 @@ public class PostController {
         return postService.getAllPostsByUserId(userId, order);
     }
 
+    @GetMapping("/getAllPostsByUserIds")
+
+    public List<Post> getAllPostsByUserId(
+            @RequestParam List<Integer> usersIds,
+            @RequestParam(name = "order", required = false) String order
+    ) {
+        return postService.findPostsByUserIds(usersIds, order);
+    }
+
     @DeleteMapping("/deleteById/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Integer id) {
