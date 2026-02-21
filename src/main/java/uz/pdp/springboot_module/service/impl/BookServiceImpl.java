@@ -5,17 +5,16 @@ import org.springframework.stereotype.Service;
 import uz.pdp.springboot_module.entity.Book;
 import uz.pdp.springboot_module.payload.BookCreator;
 import uz.pdp.springboot_module.payload.BookResponse;
+import uz.pdp.springboot_module.payload.GetBookDTO;
 import uz.pdp.springboot_module.repository.BookRepository;
 import uz.pdp.springboot_module.service.BookService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
-    private final BookService bookService;
 
     @Override
     public BookResponse createBook(BookCreator creator) {
@@ -139,5 +138,23 @@ public class BookServiceImpl implements BookService {
                         book.getPrice(),
                         book.getPages()
                 )).toList();
+    }
+
+    @Override
+    public List<BookResponse> findByParams(String name, Double price) {
+        return bookRepository.findAllByNameIgnoreCaseStartingWithAndPriceGreaterThan(name, price).stream()
+                .map(book -> new BookResponse(
+                        book.getId(),
+                        book.getName(),
+                        book.getAuthor(),
+                        book.getYear(),
+                        book.getPrice(),
+                        book.getPages()
+                )).toList();
+    }
+
+    @Override
+    public List<GetBookDTO> getBooksByName(String name) {
+        return bookRepository.getBooksByName(name);
     }
 }

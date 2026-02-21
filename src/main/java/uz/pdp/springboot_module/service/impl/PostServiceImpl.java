@@ -56,6 +56,11 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAllByUserIdIn(usersIds, sort);
     }
 
+    @Override
+    public List<Post> findByIdOrUserId(Integer idOrUsersIds) {
+        return postRepository.findAllByIdOrUserId(idOrUsersIds, idOrUsersIds);
+    }
+
 
 //    @Override
 //    public List<Post> getAllPosts() {

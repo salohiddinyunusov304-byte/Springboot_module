@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import uz.pdp.springboot_module.entity.Book;
 import uz.pdp.springboot_module.payload.BookCreator;
 import uz.pdp.springboot_module.payload.BookResponse;
+import uz.pdp.springboot_module.payload.GetBookDTO;
 import uz.pdp.springboot_module.service.BookService;
 import uz.pdp.springboot_module.utils.Constants;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,7 +48,9 @@ public class BookController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public BookResponse updateById(@RequestBody Book book) {
+    public BookResponse updateById(
+            @RequestBody Book book
+    ) {
         return bookService.update(book);
     }
 
@@ -60,4 +62,18 @@ public class BookController {
         return bookService.findByYearBetween(startYear, endYear);
     }
 
+    @GetMapping("/findByParams")
+    public List<BookResponse> findByYear(
+            @RequestParam String name,
+            @RequestParam Double price
+    ) {
+        return bookService.findByParams(name, price);
+    }
+
+    @GetMapping("/getBooksByName")
+    public List<GetBookDTO> getBooksByName(
+            @RequestParam String name
+    ) {
+        return bookService.getBooksByName(name);
+    }
 }

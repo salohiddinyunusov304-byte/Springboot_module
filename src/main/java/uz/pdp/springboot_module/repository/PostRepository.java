@@ -34,4 +34,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     List<Post> findAllByUserId(Integer userId, Sort sort);
 
     List<Post> findAllByUserIdIn(Collection<Integer> userId, Sort sort);
+
+    List<Post> findAllByIdOrUserId(Integer id, Integer userId);
 }

@@ -41,6 +41,14 @@ public class PostController {
         return postService.findPostsByUserIds(usersIds, order);
     }
 
+    @GetMapping("/getAllPostsByIdOrUserId")
+
+    public List<Post> getAllPostsByUserIdOrId(
+            @RequestParam Integer idOrUserId
+    ) {
+        return postService.findByIdOrUserId(idOrUserId);
+    }
+
     @DeleteMapping("/deleteById/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Integer id) {
