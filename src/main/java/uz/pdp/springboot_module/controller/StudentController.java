@@ -33,11 +33,12 @@ public class StudentController {
         return studentService.findById(id);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     public StudentResponse update(
+            @PathVariable Integer id,
             @RequestBody StudentCreator creator
     ) {
-        return studentService.update(creator);
+        return studentService.update(creator, id);
     }
 
     @DeleteMapping("/deleteById/{id}")

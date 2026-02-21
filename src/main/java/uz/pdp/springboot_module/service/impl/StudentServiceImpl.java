@@ -33,14 +33,14 @@ public class StudentServiceImpl implements StudentService {
                 .birthYear(creator.birthYear())
                 .build();
 
-        Student save = studentRepository.save(student);
+        studentRepository.saveAndFlush(student);
 
         return new StudentResponse(
-                save.getId(),
-                save.getGroup(),
-                save.getFirstName(),
-                save.getLastName(),
-                save.getBirthYear()
+                student.getId(),
+                student.getGroup(),
+                student.getFirstName(),
+                student.getLastName(),
+                student.getBirthYear()
         );
     }
 
@@ -75,16 +75,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentResponse update(StudentCreator creator) {
+    public StudentResponse update(StudentCreator creator, Integer id) {
         Group group = groupRepository.findById(creator.groupId())
                 .orElseThrow(() -> new RuntimeException("Group not found"));
 
-        Student student = Student.builder()
-                .group(group)
-                .firstName(creator.firstName())
-                .lastName(creator.lastName())
-                .birthYear(creator.birthYear())
-                .build();
+
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        student.setGroup(group);
+        student.setFirstName(creator.firstName());
+        student.setLastName(creator.lastName());
+        student.setBirthYear(creator.birthYear());
 
         Student save = studentRepository.save(student);
 
@@ -95,7 +97,6 @@ public class StudentServiceImpl implements StudentService {
                 save.getLastName(),
                 save.getBirthYear()
         );
-
     }
 
     @Override

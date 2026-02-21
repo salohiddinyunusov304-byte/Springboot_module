@@ -14,5 +14,5 @@ public interface StudentService {
 
     void deleteStudentById(Integer id);
 
-    StudentResponse update(StudentCreator creator);
+    StudentResponse update(StudentCreator creator, Integer id);
 }
